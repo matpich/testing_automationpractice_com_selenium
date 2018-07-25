@@ -42,7 +42,7 @@ class RegisterPage_locators():
     MOBILE_PHONE_BOX = (By.XPATH,'//input[@name="phone_mobile"]')
     ALIAS_BOX = (By.XPATH,'//input[@name="alias"]')
 
-    REGISTER_SUBMIT_BUTTON = (By.XPATH, '//button[@name="submitAccount"')
+    REGISTER_SUBMIT_BUTTON = (By.XPATH, '//button[@name="submitAccount"]')
 
 
 

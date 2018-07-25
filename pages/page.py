@@ -157,6 +157,11 @@ class RegistrationPage(AuthenticationPage):
         '''Fills "Assign an address alias for future reference." box.'''
         self.input_into_box(value, locators.RegisterPage_locators.ALIAS_BOX)
 
+    def click_register_button(self):
+        '''Clicks register button.'''
+        element = self.driver.find_element(*locators.RegisterPage_locators.REGISTER_SUBMIT_BUTTON)
+        element.click()
+
 
 
 

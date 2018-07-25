@@ -98,6 +98,8 @@ class TestRegistration():
         registration_page.fill_mobile_phone_box_address('123 456 789')
         registration_page.fill_alias_box_address('My address')
 
+        registration_page.click_register_button()
+
         assert 'class="alert alert-danger"' not in registration_page.driver.page_source
 
 
