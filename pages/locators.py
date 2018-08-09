@@ -8,10 +8,22 @@ class Common_locators():
     SEARCH_BUTTON = (By.XPATH, '//button[@name="submit_search"]')
     SEARCH_BOX = (By.XPATH, '//input[@name="search_query"]')
     SIGN_IN = (By.XPATH, '//a[@class="login"]')
+    SIGN_OUT = (By.XPATH, '//a[@class="logout"]')
 
 class AuthenticationPage_locators():
     REGISTER_EMAIL_BOX = (By.XPATH, '//input[@name="email_create"]')
     CREATE_ACCOUNT_BUTTON = (By.XPATH, '//button[@name="SubmitCreate"]')
+
+    LOGIN_EMAIL_BOX = (By.XPATH, '//input[@name="email"]')
+    LOGIN_PASSWORD_BOX = (By.XPATH, '//input[@name="passwd"]')
+
+    LOGIN_SUBMIT_BUTTON = (By.XPATH, '//button[@name="SubmitLogin"]')
+
+    FORGOT_PASSWORD = (By.XPATH, '//a[@title="Recover your forgotten password"]')
+
+class ForgotPassword_locators():
+    EMAIL_BOX = (By.XPATH,'//input[@name="email"]')
+    RETRIEVE_BUTTON = (By.XPATH,'//input[@class="btn btn-default button button-medium"][@type="submit"]')
 
 class RegisterPage_locators():
     GENDER_MALE_BUTTON = (By.XPATH, '//input[@name="id_gender"][@value="1"]')

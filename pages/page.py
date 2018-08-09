@@ -1,12 +1,13 @@
 from selenium import webdriver
 from pages import locators
+import time
 
 class BasePage():
     '''Base class to initialize in all page objects'''
     def __init__(self,driver):
         self.driver = driver
 
-    def input_into_box(self,value, location):
+    def input_into_box(self, value, location):
         '''Input search values into box.'''
         element = self.driver.find_element(*location)
         element.clear()
@@ -43,6 +44,9 @@ class HomePage(BasePage):
 
 class AuthenticationPage(BasePage):
 
+    def valid_email(self):
+        return 'mp_user_{}@test.pl'.format(str(time.time())[-5:]) #creates email addres
+
     def click_create_an_account_button(self):
         '''Clicks "create an account" button'''
         element = self.driver.find_element(*locators.AuthenticationPage_locators.CREATE_ACCOUNT_BUTTON)
@@ -51,6 +55,61 @@ class AuthenticationPage(BasePage):
     def input_into_create_an_account_email_box(self, value):
         '''Input text into register "Email addres" box.'''
         self.input_into_box(value, locators.AuthenticationPage_locators.REGISTER_EMAIL_BOX)
+
+    def start_creating_new_account(self, value):
+        '''Input email address into proper box and clicks "Create an account" button.'''
+        self.input_into_create_an_account_email_box(value)
+        self.click_create_an_account_button()
+
+    def fill_login_email_address(self,value):
+        '''Fills "Email address" field in login section.'''
+        self.input_into_box(value, locators.AuthenticationPage_locators.LOGIN_EMAIL_BOX)
+
+    def fill_login_password_address(self,value):
+        '''Fills "Password" field in login section.'''
+        self.input_into_box(value, locators.AuthenticationPage_locators.LOGIN_PASSWORD_BOX)
+
+    def click_sign_in_button(self):
+        '''Clicks "Sign in" button in login section.'''
+        element = self.driver.find_element(*locators.AuthenticationPage_locators.LOGIN_SUBMIT_BUTTON)
+        element.click()
+
+    def login(self, email, password):
+        '''Login user.'''
+        self.logout_if_logged_in()
+        self.fill_login_email_address(email)
+        self.fill_login_password_address(password)
+        self.click_sign_in_button()
+
+    def logout(self):
+        '''Logout user.'''
+        element = self.driver.find_element(*locators.Common_locators.SIGN_OUT)
+        element.click()
+
+    def is_logged(self):
+        '''Check if user is logged in.'''
+        return True if 'Sign out' in self.driver.page_source else False
+
+    def logout_if_logged_in(self):
+        '''Logout user if logged in.'''
+        if self.is_logged():
+            self.logout()
+
+class ForgotPassword(AuthenticationPage):
+
+    def fill_email(self, value):
+        '''Fills "Email" field in retrieve password section.'''
+        self.input_into_box(value, locators.ForgotPassword_locators.EMAIL_BOX)
+
+    def click_retrieve_password_button(self):
+        '''Clicks "Retrieve Password" button in retrieve password section.'''
+        element = self.driver.find_element(*locators.ForgotPassword_locators.RETRIEVE_BUTTON)
+        element.click()
+
+    def forgot_password(self, value):
+        '''Input email address and clicks retrieve button.'''
+        self.fill_email(value)
+        self.click_retrieve_password_button()
 
 class RegistrationPage(AuthenticationPage):
 
@@ -161,6 +220,32 @@ class RegistrationPage(AuthenticationPage):
         '''Clicks register button.'''
         element = self.driver.find_element(*locators.RegisterPage_locators.REGISTER_SUBMIT_BUTTON)
         element.click()
+
+    def valid_form_fill(self):
+        #YOUR PERSONAL INFORMATION
+        self.click_male_gender_button()
+        self.fill_first_name('Jan')
+        self.fill_last_name('Kowalski')
+        self.fill_password('qwerty')
+        self.select_date_of_birth('6','8','1992')
+        self.click_newsletter()
+        self.click_special_offers()
+
+        #YOUR ADDRESS
+        self.fill_first_name_address('Jan')
+        self.fill_last_name_address('Kowalski')
+        self.fill_company_name_address('Unemployed')
+        self.fill_first_box_address('Johnson\'s street')
+        self.fill_second_box_address('Test Avenue 42')
+        self.fill_city_box_address('New York')
+        self.select_state_address('53')
+        self.fill_postal_code_box_address('02689')
+        self.select_country_address()
+        self.fill_additional_information_box_address('Lorem Ipsum Dolor Sit Amet.')
+        self.fill_home_phone_box_address('45 235 66 35')
+        self.fill_mobile_phone_box_address('123 456 789')
+        self.fill_alias_box_address('My address')
+
 
 
 
