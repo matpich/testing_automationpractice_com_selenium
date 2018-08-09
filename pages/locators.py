@@ -23,7 +23,7 @@ class AuthenticationPage_locators():
 
 class ForgotPassword_locators():
     EMAIL_BOX = (By.XPATH,'//input[@name="email"]')
-    RETRIEVE_BUTTON = (By.XPATH,'//input[@class="btn btn-default button button-medium"][@type="submit"]')
+    RETRIEVE_BUTTON = (By.XPATH,'//button[@class="btn btn-default button button-medium"][@type="submit"]')
 
 class RegisterPage_locators():
     GENDER_MALE_BUTTON = (By.XPATH, '//input[@name="id_gender"][@value="1"]')

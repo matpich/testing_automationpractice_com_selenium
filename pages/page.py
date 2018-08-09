@@ -97,18 +97,18 @@ class AuthenticationPage(BasePage):
 
 class ForgotPassword(AuthenticationPage):
 
-    def fill_email(self, value):
+    def fill_email(self, email):
         '''Fills "Email" field in retrieve password section.'''
-        self.input_into_box(value, locators.ForgotPassword_locators.EMAIL_BOX)
+        self.input_into_box(email, locators.ForgotPassword_locators.EMAIL_BOX)
 
     def click_retrieve_password_button(self):
         '''Clicks "Retrieve Password" button in retrieve password section.'''
         element = self.driver.find_element(*locators.ForgotPassword_locators.RETRIEVE_BUTTON)
         element.click()
 
-    def forgot_password(self, value):
+    def forgot_password(self, email):
         '''Input email address and clicks retrieve button.'''
-        self.fill_email(value)
+        self.fill_email(email)
         self.click_retrieve_password_button()
 
 class RegistrationPage(AuthenticationPage):

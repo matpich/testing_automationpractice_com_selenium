@@ -21,6 +21,12 @@ def authentication_page(set_driver):
     set_driver.get('http://automationpractice.com/index.php?controller=authentication&back=my-account')
     return page.AuthenticationPage(set_driver)
 
+@pytest.fixture()
+def forgot_password_page(set_driver):
+    '''Return AuthenticationPage object.'''
+    set_driver.get('http://automationpractice.com/index.php?controller=password')
+    return page.ForgotPassword(set_driver)
+
 @pytest.fixture(scope='function')
 def registration_page(set_driver):
     '''Return RegistrationPage object.'''

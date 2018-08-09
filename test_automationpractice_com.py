@@ -76,10 +76,17 @@ class TestRegistration():
         registration_page.click_register_button()
         assert  'class="alert alert-danger"' in registration_page.driver.page_source
 
+class TestForgotPassword():
+    '''Tests retrieving password.'''
 
+    def test_valid_retrieve(self, forgot_password_page):
+        forgot_password_page.forgot_password('test_test@test.test')
+        assert 'A confirmation email has been sent to your address:' in forgot_password_page.driver.page_source
 
+    def test_invalid_email_retrieve(self, forgot_password_page):
+        forgot_password_page.forgot_password('invalid_email')
+        assert 'Invalid email address' in forgot_password_page.driver.page_source
 
-
-
-
-
+    def test_non_existing_email_retrieve(self, forgot_password_page):
+        forgot_password_page.forgot_password('non-existing-email-address@nonex.uga')
+        assert 'There is no account registered for this email address' in forgot_password_page.driver.page_source
